@@ -13,6 +13,10 @@ from django.utils.encoding import force_str
 from .models import Profile
 from .serializers import ProfileSerializer
 from django.contrib.auth.models import User
+from rest_framework import generics
+from .serializers import UserUpdateSerializer
+
+
 
 
 from .serializers import UserSerializer, LoginSerializer, PasswordResetSerializer
@@ -79,11 +83,24 @@ class PasswordResetConfirm(APIView):
             user.save()
             return Response({'message': 'Password reset successful'}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid or expired reset link'}, status=status.HTTP_400_BAD_REQUEST)
+    
+class UserUpdateAPIView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserUpdateSerializer
+    lookup_field = 'pk'
 
 class ProfileCreate(APIView):
     def post(self, request):
         return Response({'message': 'Password reset successful'}, status=status.HTTP_200_OK)
 
 class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class ProfileListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class ProfileRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer

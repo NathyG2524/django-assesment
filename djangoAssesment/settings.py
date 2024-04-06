@@ -14,12 +14,14 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Fetch API keys from environment variables
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 GOOGLE_SECRET = os.getenv('GOOGLE_SECRET')
+
+FACEBOOK_CLIENT_ID = os.getenv('FACEBOOK_CLIENT_ID')
+FACEBOOK_SECRET = os.getenv('FACEBOOK_SECRET')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -192,5 +194,15 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': GOOGLE_SECRET,
             'key': ''
         }
+    },
+
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile'],
+        'APP': {
+            'client_id': FACEBOOK_CLIENT_ID,
+            'secret': FACEBOOK_SECRET,
+        }
     }
+
 }

@@ -12,3 +12,4 @@ class Profile(models.Model):
         ('player', 'Player'),
     )
     role = models.CharField(max_length=10, choices=ROLES)
+
