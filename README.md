@@ -68,6 +68,3 @@ python manage.py runserver
 - `POST /api/profiles/`: Create a new profile.
 - `PUT /api/profiles/<id>/`: Update an existing profile.
 - `DELETE /api/profiles/<id>/`: Delete a profile.
-
-
-
